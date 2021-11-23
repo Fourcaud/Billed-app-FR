@@ -15,19 +15,37 @@ export default class NewBill {
     this.fileName = null
     new Logout({ document, localStorage, onNavigate })
   }
+  firestoreHandler = (fileName, file, isExtensionCorrect) => {
+    if (this.firestore) {
+      this.firestore.storage
+        .ref(`justificatifs/${fileName}`)
+        .put(file)
+        .then((snapshot) => snapshot.ref.getDownloadURL())
+        .then((url) => {
+          this.fileUrl = url
+          this.fileName = fileName
+        });
+    }
+  };
+
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    this.firestore
-      .storage
-      .ref(`justificatifs/${fileName}`)
-      .put(file)
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        this.fileUrl = url
-        this.fileName = fileName
-      })
+  //extension correct
+    const fileExtension = fileName.split(".").pop()
+    const extensionRgx = /(png|jpg|jpeg)/g
+    const isExtensionCorrect = fileExtension.toLowerCase().match(extensionRgx)
+
+    if(isExtensionCorrect) {
+      this.firestoreHandler(fileName, file, isExtensionCorrect)
+    } else if(!isExtensionCorrect) {
+      alert('file type not allowed')
+      this.document.querySelector(`input[data-testid="file"]`).value = null
+    }
+
+
+
   }
   handleSubmit = e => {
     e.preventDefault()
