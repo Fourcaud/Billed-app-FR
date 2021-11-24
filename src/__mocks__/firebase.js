@@ -1,4 +1,31 @@
+import firebase from "./firebase";
+
 export default {
+  post: async (newBill) => {
+    const getFirebase = await firebase.get()
+
+    return Promise.resolve({
+      data: [
+        ...getFirebase.data,
+        {
+          id: newBill.id,
+          status: newBill.status,
+          pct: newBill.pct,
+          amount: newBill.amount,
+          email: newBill.email,
+          name: newBill.name,
+          vat: newBill.vat,
+          fileName: newBill.fileName,
+          date: newBill.date,
+          commentAdmin: newBill.commentAdmin,
+          commentary: newBill.commentary,
+          type: newBill.type,
+          fileUrl: newBill.fileUrl,
+        }
+      ]
+    })
+  },
+  
   get: () => {
     return Promise.resolve({
       data: [{
@@ -62,5 +89,5 @@ export default {
         "fileUrl": "https://firebasestorage.googleapis.com/v0/b/billable-677b6.a…f-1.jpg?alt=media&token=4df6ed2c-12c8-42a2-b013-346c1346f732"
       }]
     })
-  }
+  },
 }

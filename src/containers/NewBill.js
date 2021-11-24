@@ -15,6 +15,7 @@ export default class NewBill {
     this.fileName = null
     new Logout({ document, localStorage, onNavigate })
   }
+
   firestoreHandler = (fileName, file, isExtensionCorrect) => {
     if (this.firestore) {
       this.firestore.storage
@@ -28,11 +29,11 @@ export default class NewBill {
     }
   };
 
-  handleChangeFile = e => {
+  handleChangeFile = () => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-    const filePath = e.target.value.split(/\\/g)
-    const fileName = filePath[filePath.length-1]
-  //extension correct
+    const filePath = file.name.split(/\\/g)
+    const fileName = filePath[filePath.length - 1]
+
     const fileExtension = fileName.split(".").pop()
     const extensionRgx = /(png|jpg|jpeg)/g
     const isExtensionCorrect = fileExtension.toLowerCase().match(extensionRgx)
@@ -43,13 +44,11 @@ export default class NewBill {
       alert('file type not allowed')
       this.document.querySelector(`input[data-testid="file"]`).value = null
     }
-
-
-
-  }
+  };
+  
   handleSubmit = e => {
     e.preventDefault()
-    console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
+    
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {
       email,
@@ -72,12 +71,12 @@ export default class NewBill {
   createBill = (bill) => {
     if (this.firestore) {
       this.firestore
-      .bills()
-      .add(bill)
-      .then(() => {
-        this.onNavigate(ROUTES_PATH['Bills'])
-      })
-      .catch(error => error)
+        .bills()
+        .add(bill)
+        .then(() => {
+          this.onNavigate(ROUTES_PATH['Bills'])
+        })
+        .catch(error => error)
     }
   }
 }
