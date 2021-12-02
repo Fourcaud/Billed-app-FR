@@ -18,10 +18,10 @@ const row = (bill) => {
     </tr>
     `)
   }
-
+  
   const rows = (data) => {
     if (data && data.length) {
-      data.sort( (a, b) => ((a.date < b.date) ? 1 : -1));
+        data.sort( (a, b) => ((a.date < b.date) ? 1 : -1));
     }
   
     return (data && data.length) ? data.map(bill => row(bill)).join("") : ""

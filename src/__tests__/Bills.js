@@ -90,7 +90,7 @@ describe("Étant donné que je suis connecté en tant qu'employé", () => {
     })
 
 
-    describe("Quand je clique sur l'icône oeil d'une facture", () => {
+    describe(" Quand je clique sur l'icône oeil d'une facture", () => {
       test("Une modal devrait s'ouvrir", () => {
         Object.defineProperty(window, 'localStorage', { value: localStorageMock })
         window.localStorage.setItem('user', JSON.stringify({
