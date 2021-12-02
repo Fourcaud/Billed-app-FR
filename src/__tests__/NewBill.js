@@ -71,7 +71,7 @@ describe("Étant donné que je suis connecté en tant qu'employé", () => {
         const handleChangeFile = jest.fn((e) => newBills.handleChangeFile)
         const fileInput = screen.getByTestId('file')
 
-        // https://github.com/testing-library/react-testing-library/issues/93#issuecomment-392126991
+        
         fileInput.addEventListener("change", handleChangeFile)
         fireEvent.change(fileInput, { 
           target: { 
@@ -109,7 +109,7 @@ describe("Étant donné que je suis connecté en tant qu'employé", () => {
         const handleChangeFile = jest.fn((e) => newBills.handleChangeFile)
         const fileInput = screen.getByTestId('file')
   
-        // https://github.com/testing-library/react-testing-library/issues/93#issuecomment-392126991
+        
         fileInput.addEventListener("change", handleChangeFile)
         fireEvent.change(fileInput, { 
           target: { 
