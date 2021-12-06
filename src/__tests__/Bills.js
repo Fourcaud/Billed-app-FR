@@ -1,4 +1,4 @@
-import { screen, fireEvent } from "@testing-library/dom"
+import { screen} from "@testing-library/dom"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 import BillsUI from "../views/BillsUI.js"
 import { bills } from "../fixtures/bills.js"
@@ -6,12 +6,12 @@ import { ROUTES, ROUTES_PATH } from "../constants/routes"
 import Router from "../app/Router"
 import Bills from "../containers/Bills.js"
 import userEvent from "@testing-library/user-event"
-import firebase from "../__mocks__/firebase"
+
 import Firestore from "../app/Firestore"
 
 
 
-describe("Étant donné que je suis connecté en tant qu'employé", () => {
+describe(" Étant donné que je suis connecté en tant qu'employé", () => {
   describe("Quand je suis sur la page du tableau de bord mais qu'elle est en cours de chargement", () => {
     test("Alors, la page de chargement devrait être rendue", () => {
       const html = BillsUI({ loading: true })
@@ -33,7 +33,7 @@ describe("Étant donné que je suis connecté en tant qu'employé", () => {
       // mock this.store.collection('bills') at Firestore.bills (src/app/Firestore.js:18:28)
       Firestore.bills = () => ({ bills, get: jest.fn().mockResolvedValue() })
 
-      // Mock local Storage on window to set user connected as Employee
+      // Mock local Storage sur window pour définir l'utilisateur connecté en tant qu'employé
       Object.defineProperty(window, "localStorage", { value: localStorageMock })
       window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
 
@@ -61,7 +61,7 @@ describe("Étant donné que je suis connecté en tant qu'employé", () => {
 
 
     describe("Quand je clique sur New Bill btn", () => {
-      test("Cela devrait rendre la nouvelle page de facture", () => {
+      test("Alors Cela devrait rendre la nouvelle page de facture", () => {
         window.localStorage.setItem('user', JSON.stringify({
           type: 'Employee'
         }))
@@ -91,7 +91,7 @@ describe("Étant donné que je suis connecté en tant qu'employé", () => {
 
 
     describe(" Quand je clique sur l'icône oeil d'une facture", () => {
-      test("Une modal devrait s'ouvrir", () => {
+      test("Alors Une modal devrait s'ouvrir", () => {
         Object.defineProperty(window, 'localStorage', { value: localStorageMock })
         window.localStorage.setItem('user', JSON.stringify({
           type: 'Employee'
