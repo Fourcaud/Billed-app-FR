@@ -2,8 +2,6 @@ import { screen, fireEvent } from "@testing-library/dom"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
-import BillsUI from "../views/BillsUI.js"
-import firebase from "../__mocks__/firebase"
 import { ROUTES } from "../constants/routes"
 
 window.alert = jest.fn();
