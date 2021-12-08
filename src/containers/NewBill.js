@@ -16,7 +16,7 @@ export default class NewBill {
     new Logout({ document, localStorage, onNavigate })
   }
 
-  firestoreHandler = (fileName, file, isExtensionCorrect) => {
+  firestoreHandler = (fileName, file) => {
     if (this.firestore) {
       this.firestore.storage
         .ref(`justificatifs/${fileName}`)
@@ -39,7 +39,7 @@ export default class NewBill {
     const isExtensionCorrect = fileExtension.toLowerCase().match(extensionRgx)
 
     if(isExtensionCorrect) {
-      this.firestoreHandler(fileName, file, isExtensionCorrect)
+      this.firestoreHandler(fileName, file)
     } else if(!isExtensionCorrect) {
       alert('file type not allowed')
       this.document.querySelector(`input[data-testid="file"]`).value = null

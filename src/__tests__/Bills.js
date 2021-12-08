@@ -30,14 +30,14 @@ describe("Given :  Étant donné que je suis connecté en tant qu'employé", () 
 
   describe("Quand je suis sur la page Factures", () => {
     test("Alors l'icône de la facture dans la disposition verticale doit être mise en surbrillance", () => {
-      // mock this.store.collection('bills') at Firestore.bills (src/app/Firestore.js:18:28)
+      
       Firestore.bills = () => ({ bills, get: jest.fn().mockResolvedValue() })
 
       // Mock local Storage sur window pour définir l'utilisateur connecté en tant qu'employé
       Object.defineProperty(window, "localStorage", { value: localStorageMock })
       window.localStorage.setItem("user", JSON.stringify({type: "Employee"}));
 
-      // Define the location of window
+    
       const pathname = ROUTES_PATH["Bills"] // return '#employee/bills'
       Object.defineProperty(window, "location", { value: { hash: pathname } })
       
