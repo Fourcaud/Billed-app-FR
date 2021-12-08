@@ -11,9 +11,9 @@ import Firestore from "../app/Firestore"
 
 
 
-describe(" Étant donné que je suis connecté en tant qu'employé", () => {
-  describe("Quand je suis sur la page du tableau de bord mais qu'elle est en cours de chargement", () => {
-    test("Alors, la page de chargement devrait être rendue", () => {
+describe("Given :  Étant donné que je suis connecté en tant qu'employé", () => {
+  describe("When : Quand je suis sur la page du tableau de bord mais qu'elle est en cours de chargement", () => {
+    test("Then : Alors, la page de chargement devrait être rendue", () => {
       const html = BillsUI({ loading: true })
       document.body.innerHTML = html
       expect(screen.getAllByText('Loading...')).toBeTruthy()
